@@ -55,11 +55,6 @@ import nz.co.jersey.google.oauth.SimpleOAuthService;
 
 import org.glassfish.jersey.client.oauth2.ClientIdentifier;
 
-/**
- * Resource initializes Client ID (ID of application issued by Google).
- *
- * @author Miroslav Fuksa
- */
 @Path("setup")
 public class SetupResource {
 	@Context
@@ -67,13 +62,10 @@ public class SetupResource {
 
 	@GET
 	@Produces("text/html")
-	public Response setup(@QueryParam("clientId") String consumerKey,
-			@QueryParam("clientSecret") String consumerSecret) {
-
+	public Response setup(@QueryParam("clientId") String consumerKey, @QueryParam("clientSecret") String consumerSecret) {
 		SimpleOAuthService.setClientIdentifier(new ClientIdentifier(consumerKey, consumerSecret));
 		final URI uri = UriBuilder.fromUri(uriInfo.getBaseUri()).path("tasks")
 				.build();
-
 		return Response.seeOther(uri).build();
 	}
 }
